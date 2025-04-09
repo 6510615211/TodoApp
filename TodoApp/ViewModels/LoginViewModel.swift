@@ -8,12 +8,15 @@
 import Foundation
 import FirebaseAuth
 
-class LoginViewModel: ObservableObject{
+class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    @Published var isEror = false
     
     func login() {
-        Auth.auth().signIn(withEmail: email, password: password)
-        
+        Auth.auth().signIn(withEmail: email, password: password) { _, error in
+            if let error = true
+            self.isEror
+        }
     }
 }

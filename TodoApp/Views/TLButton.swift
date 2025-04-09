@@ -18,16 +18,20 @@ struct TLButton: View {
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.green)
-                Text("Create Account")
+                    .foregroundColor(background)
+                Text(title)
                     .foregroundColor(.white)
                     .bold()
                     .padding(5)
+            }
+        }
     }
 }
 
 #Preview {
     TLButton(
-        title: <#T##String#>, background: <#T##Color#>, action: <#T##() -> Void#>
+        title: "Button",
+        background: .blue,
+        action: {}
     )
 }

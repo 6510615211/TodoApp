@@ -23,17 +23,16 @@ class RegisterViewModel: ObservableObject {
                 print(error.localizedDescription)
                 return
             }
-            guard let userId = result?.user.uid else{
+            guard let userId = result?.user.uid else {
                 print("error registering")
                 return
             }
             self.insertUserRecord(id: userId)
         }
-        
     }
     
     private func insertUserRecord(id: String) {
-        let newUser = User(id: id, name:name, email: email, joined: Date().timeIntervalSince1970)
+        let newUser = User(id: id, name: name, email: email, joined: Date().timeIntervalSince1970)
         let db = Firestore.firestore()
         db.collection("users")
             .document(id)
