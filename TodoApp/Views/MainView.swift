@@ -11,8 +11,7 @@ struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     
     var body: some View {
-        if viewModel.isSignedIn,
-            !viewModel.currentUserId.isEmpty {
+        if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
             accountView
         } else {
             LoginView()
@@ -21,11 +20,11 @@ struct MainView: View {
     
     var accountView: some View {
         TabView {
-            TodoListView(userId:viewModel.currentUserId)
-                .tabItem{
+            TodoListView(userId: viewModel.currentUserId)
+                .tabItem {
                     Label("Home", systemImage: "house")
                 }
-        
+            
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")

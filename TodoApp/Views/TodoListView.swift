@@ -11,16 +11,17 @@ import FirebaseFirestore
 struct TodoListView: View {
     @StateObject var viewModel: TodoListViewModel
     @FirestoreQuery var items: [TodoListItem]
+    
     init(userId: String) {
         self._viewModel = StateObject(wrappedValue: TodoListViewModel(userId: userId))
-        self._items = FirestoreQuery(collectionPath:"users/\(userId)/todos")
+        self._items = FirestoreQuery(collectionPath: "users/\(userId)/todos")
     }
     
     var body: some View {
         NavigationView {
-            VStack{
+            VStack {
                 List(items) { item in
-                    Text(item.title)
+                    TodoListItemView(item: item)
                         .swipeActions {
                             Button {
                                 viewModel.delete(id: item.id)
@@ -29,7 +30,6 @@ struct TodoListView: View {
                             }
                             .tint(.red)
                         }
-                    
                 }
                 .listStyle(PlainListStyle())
             }
@@ -39,17 +39,15 @@ struct TodoListView: View {
                     viewModel.showingNewItemView = true
                 } label: {
                     Image(systemName: "plus")
-                    
                 }
             }
-            .sheet(isPresented: $viewModel.showingNewItemView){
+            .sheet(isPresented: $viewModel.showingNewItemView) {
                 NewItemView(newItemPresented: $viewModel.showingNewItemView)
             }
         }
-        
     }
 }
 
 #Preview {
-    TodoListView(viewModel: TodoListViewModel(userId:"O7kcuahqsHQYbQOLlUF5BXw1yUn2"))
+    TodoListView(userId: "V71SZ77Mw2PDnDZY6XT6mGC8eQF2")
 }

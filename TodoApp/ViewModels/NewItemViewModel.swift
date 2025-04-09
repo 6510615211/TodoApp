@@ -28,10 +28,9 @@ class NewItemViewModel: ObservableObject {
             createDate: Date().timeIntervalSince1970,
             isDone: false
         )
-        
         let db = Firestore.firestore()
-        db.collection("users").document(uId).collection("todos").document(newId).setData(newItem.asDictionary())
-        
+        db.collection("users").document(uId).collection("todos").document(newId)
+            .setData(newItem.asDictionary())
     }
     
     var canSave: Bool {
@@ -42,6 +41,7 @@ class NewItemViewModel: ObservableObject {
         guard dueDate >= Date().addingTimeInterval(-86400) else {
             return false
         }
+        
         return true
     }
 }

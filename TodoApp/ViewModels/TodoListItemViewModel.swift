@@ -9,7 +9,6 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-
 class TodoListItemViewModel: ObservableObject {
     func toggleIsDone(item: TodoListItem) {
         var itemCopy = item
@@ -21,7 +20,7 @@ class TodoListItemViewModel: ObservableObject {
         let db = Firestore.firestore()
         db.collection("users")
             .document(uId)
-            .collection("todods")
+            .collection("todos")
             .document(itemCopy.id)
             .setData(itemCopy.asDictionary())
     }
